@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "app": "pnpm --filter react-app",
+    "api": "pnpm --filter api-client",
+    "generate": "openapi-generator-cli generate -i https://petstore.swagger.io/v2/swagger.json -g typescript-fetch -o ./packages/api-client --skip-validate-spec --additional-properties=npmName=api-client,npmVersion=\"1.0.0\",supportsES6=true",
+    "postinstall": "pnpm generate && pnpm api prepare && pnpm api build"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.15.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "api-client": "workspace:*"
+    }
+  }
+}
